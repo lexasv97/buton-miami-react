@@ -6,8 +6,15 @@ import HomePage from './pages/HomePage';
 import UserLogin from './pages/LoginPage';
 import UserSignup from './pages/SignupPage';
 import { AuthContext } from './context/auth.context';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 function App() {
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'demo'
+    }
+  });
 
   const { isLoggedIn } = useContext(AuthContext)! || {}
 
@@ -20,7 +27,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='font-serif flex flex-col min-h-screen justify-between'>
       <Navbar />
 
       <Routes>
