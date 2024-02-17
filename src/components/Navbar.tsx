@@ -1,32 +1,43 @@
 import React from 'react'
 import { IoSearch, IoCartOutline, IoMenu } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
-import logo from '../../public/buton_logo.jpg'
+// import logo from '../../public/buton_logo.jpg'
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context";
 import { RxCross2 } from "react-icons/rx";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete' //
-
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const Navbar = () => {
+
+    const cld = new Cloudinary({ cloud: { cloudName: 'ddvlnojuu' } });
+
+    const myImage = cld.image('docs/logo');
+
+    // Resize to 250 x 250 pixels using the 'fill' crop mode.
+    // myImage.resize(fill());
+    // resize picture
 
     const [click, setClick] = useState<boolean>(false);
     const { isLoggedIn, user } = useContext(AuthContext)!
 
     const getToken = () => {
         return localStorage.getItem('authToken')
-      }
+    }
 
-      const handleSearchClick = () => {
+    const handleSearchClick = () => {
 
-      }
+    }
 
     const mobileMenu = <div className="">
         <ul className="">
 
             <div>
-                <Link to='/'>Home</Link>
+                <Link to='/'>
+                    Home                </Link>
             </div>
             <div>
                 <Link to='/purchase-guarantees'>Terms & Conditions</Link>
@@ -58,10 +69,10 @@ const Navbar = () => {
         </ul>
     </div>
     return (
-        <div className='bg-purple'>
+        <div className='bg-purple h-1/5'>
             <div className='flex justify-between'>
-                <div>
-                    <img src='' />
+                <div className=''>
+                    <AdvancedImage cldImg={myImage} />
                 </div>
                 <div className='flex justify-between gap-4'>
                     <div>
